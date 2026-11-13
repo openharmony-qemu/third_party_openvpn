@@ -231,4 +231,8 @@ dns_updown_forced(const struct dns_options *o)
     return o->updown_flags == DNS_UPDOWN_FORCED;
 }
 
+#ifndef _WIN32
+void setenv_dns_options(const struct dns_options *o, struct env_set *es);
+#endif
+
 #endif /* ifndef DNS_H */

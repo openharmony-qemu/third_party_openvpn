@@ -109,6 +109,11 @@ typedef SSIZE_T ssize_t;
 
 #ifdef HAVE_SYS_SOCKET_H
 #include <sys/socket.h>
+#ifdef __OHOS__
+#define sockaddr_storage openvpn_kernel_sockaddr_storage
+#include <linux/socket.h>
+#undef sockaddr_storage
+#endif
 #endif
 
 #ifdef HAVE_SYS_UN_H

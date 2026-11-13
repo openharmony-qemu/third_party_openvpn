@@ -500,7 +500,7 @@ setenv_dns_option(struct env_set *es, const char *format, int i, int j, const ch
     setenv_str(es, name, value);
 }
 
-static void
+void
 setenv_dns_options(const struct dns_options *o, struct env_set *es)
 {
     struct gc_arena gc = gc_new();

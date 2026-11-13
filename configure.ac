@@ -310,6 +310,12 @@ fi
 AC_DEFINE_UNQUOTED([TARGET_ALIAS], ["${host}"], [A string representing our host])
 AM_CONDITIONAL([ENABLE_DNS_UPDOWN],[true])
 case "$host" in
+	*-*-ohos*)
+		AC_DEFINE([TARGET_LINUX], [1], [OHOS Linux-kernel networking])
+		AC_DEFINE_UNQUOTED([TARGET_PREFIX], ["L"], [Target prefix])
+		AC_SUBST([DNS_UPDOWN_TYPE], ["resolvconf_file"])
+		have_sitnl="yes"
+		;;
 	*-*-linux*)
 		AC_DEFINE([TARGET_LINUX], [1], [Are we running on Linux?])
 		AC_DEFINE_UNQUOTED([TARGET_PREFIX], ["L"], [Target prefix])

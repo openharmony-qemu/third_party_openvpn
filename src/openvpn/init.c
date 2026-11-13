@@ -53,6 +53,7 @@
 #include "mudp.h"
 #include "dco.h"
 #include "tun_afunix.h"
+#include "dns.h"
 
 #include "memdbg.h"
 
@@ -1830,6 +1831,11 @@ open_tun_backend(struct context *c)
     }
     else if (tt->backend_driver == DRIVER_AFUNIX)
     {
+#ifndef _WIN32
+        /* Export the final merged policy for the real AF_UNIX bridge. The
+         * ordinary DNS-updown runner and all other backends keep their APIs. */
+        setenv_dns_options(&c->options.dns_options, c->c2.es);
+#endif
         open_tun_afunix(&c->options, c->c2.frame.tun_mtu, tt, c->c2.es);
     }
     else
